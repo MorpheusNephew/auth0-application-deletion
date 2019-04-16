@@ -10,6 +10,6 @@
     "python.unitTest.nosetestsEnabled": false,
     "python.unitTest.unittestEnabled": false,
     "python.unitTest.pyTestArgs": [
-        "tests"
+        "deletesite/tests"
     ]
 }

@@ -2,7 +2,7 @@
 """
 
 import logging
-from utilities import directory
+from deletesite.utilities import directory
 
 
 class Auth0Logger:

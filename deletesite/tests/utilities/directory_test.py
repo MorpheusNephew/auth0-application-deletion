@@ -4,7 +4,7 @@
 
 from unittest import TestCase
 from os import makedirs, removedirs, path
-import utilities.directory as dr
+import deletesite.utilities.directory as dr
 
 
 class DirectoryTests(TestCase):
