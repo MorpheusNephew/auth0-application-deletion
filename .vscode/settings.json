@@ -1,16 +1,21 @@
 {
-    "python.unitTest.unittestArgs": [
+    "python.testing.unittestArgs": [
         "-v",
         "-s",
         "./tests",
         "-p",
-        "*_test.py"
+        "test_*.py"
     ],
-    "python.unitTest.pyTestEnabled": true,
-    "python.unitTest.nosetestsEnabled": false,
-    "python.unitTest.unittestEnabled": false,
-    "python.unitTest.pyTestArgs": [
-        "deletesite/tests"
+    "python.testing.pyTestEnabled": true,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pyTestArgs": [
+        "."
     ],
-    "python.pythonPath": "venv/bin/python"
+    "python.pythonPath": "venv/bin/python",
+    "pythonTestExplorer.testFramework": "pytest",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": false,
+    "python.linting.pep8Enabled": true
 }
