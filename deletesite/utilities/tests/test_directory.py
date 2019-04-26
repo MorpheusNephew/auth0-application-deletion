@@ -12,6 +12,9 @@ def test_creating_directory_if_none_present(mocker):
     """Test asserts directory does not exist then tests that the
     `ensure_exists` method creates the directory and removes the
     directory in cleanup
+
+    Arguments:
+        mocker {pytest_mocker} -- wrappert to python mock
     """
 
     mocked_makedirs = mocker.patch(f'{directory_module}.makedirs')
@@ -31,6 +34,9 @@ def test_creating_directory_if_none_present(mocker):
 def test_should_not_error_when_attempting_to_create_an_existing_directory(mocker):
     """Test asserts that directory `ensure_exists` method does not error if
     directory already exists
+
+    Arguments:
+        mocker {pytest_mocker} -- wrapper to python mock
     """
 
     mocked_makedirs = mocker.patch(f'{directory_module}.makedirs')
