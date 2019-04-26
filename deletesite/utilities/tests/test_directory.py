@@ -18,11 +18,10 @@ def test_creating_directory_if_none_present(mocker):
     file_path = path.join(dir_path, 'test.log')
 
     mocked_makedirs = mocker.patch(f'{directory_module}.makedirs')
-    mocked_dirname = mocker.patch(f'{directory_module}.path.dirname')
-    mocked_exists = mocker.patch(f'{directory_module}.path.exists')
+    mocked_path = mocker.patch(f'{directory_module}.path')
 
-    mocked_dirname.return_value = dir_path
-    mocked_exists.return_value = False
+    mocked_path.dirname.return_value = dir_path
+    mocked_path.exists.return_value = False
 
     ensure_exists(file_path)
 
