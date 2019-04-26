@@ -14,11 +14,11 @@ def test_creating_directory_if_none_present(mocker):
     directory in cleanup
     """
 
-    dir_path = 'test'
-    file_path = path.join(dir_path, 'test.log')
-
     mocked_makedirs = mocker.patch(f'{directory_module}.makedirs')
     mocked_path = mocker.patch(f'{directory_module}.path')
+
+    dir_path = 'test'
+    file_path = path.join(dir_path, 'test.log')
 
     mocked_path.dirname.return_value = dir_path
     mocked_path.exists.return_value = False
