@@ -18,6 +18,8 @@ class TestLogger:
             mocker {pytest_mocker} -- wrapper for python mock
         """
 
+        # TODO: Figure out mocking strategy for instance property of a nested class
+
         # mocked_logger = mocker.patch(f'{auth0_logger_module}.logging.Logger')
 
         # Auth0Logger._Auth0LoggerInstance(output_file_path=None)
