@@ -8,42 +8,45 @@ from os import path
 directory_module = 'deletesite.utilities.directory'
 
 
-def test_creating_directory_if_none_present(mocker):
-    """Test asserts directory does not exist then tests that the
-    `ensure_exists` method creates the directory and removes the
-    directory in cleanup
-
-    Arguments:
-        mocker {pytest_mocker} -- wrappert to python mock
+class TestDirectory:
+    """Tests for directory utility
     """
 
-    mocked_makedirs = mocker.patch(f'{directory_module}.makedirs')
-    mocked_path = mocker.patch(f'{directory_module}.path')
+    def test_creating_directory_if_none_present(self, mocker):
+        """Test asserts directory does not exist then tests that the
+        `ensure_exists` method creates the directory and removes the
+        directory in cleanup
 
-    dir_path = 'test'
-    file_path = path.join(dir_path, 'test.log')
+        Arguments:
+            mocker {pytest_mocker} -- wrappert to python mock
+        """
 
-    mocked_path.dirname.return_value = dir_path
-    mocked_path.exists.return_value = False
+        mocked_makedirs = mocker.patch(f'{directory_module}.makedirs')
+        mocked_path = mocker.patch(f'{directory_module}.path')
 
-    ensure_exists(file_path)
+        dir_path = 'test'
+        file_path = path.join(dir_path, 'test.log')
 
-    mocked_makedirs.assert_called_once_with(dir_path)
+        mocked_path.dirname.return_value = dir_path
+        mocked_path.exists.return_value = False
 
+        ensure_exists(file_path)
 
-def test_should_not_error_when_attempting_to_create_an_existing_directory(mocker):
-    """Test asserts that directory `ensure_exists` method does not error if
-    directory already exists
+        mocked_makedirs.assert_called_once_with(dir_path)
 
-    Arguments:
-        mocker {pytest_mocker} -- wrapper to python mock
-    """
+    def test_should_not_error_when_attempting_to_create_an_existing_directory(self, mocker):
+        """Test asserts that directory `ensure_exists` method does not error if
+        directory already exists
 
-    mocked_makedirs = mocker.patch(f'{directory_module}.makedirs')
-    mocked_exists = mocker.patch(f'{directory_module}.path.exists')
+        Arguments:
+            mocker {pytest_mocker} -- wrapper to python mock
+        """
 
-    mocked_exists.return_value = True
+        mocked_makedirs = mocker.patch(f'{directory_module}.makedirs')
+        mocked_exists = mocker.patch(f'{directory_module}.path.exists')
 
-    ensure_exists('file path')
+        mocked_exists.return_value = True
 
-    mocked_makedirs.assert_not_called()
+        ensure_exists('file path')
+
+        mocked_makedirs.assert_not_called()
