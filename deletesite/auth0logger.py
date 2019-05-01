@@ -2,7 +2,7 @@
 """
 
 import logging
-from deletesite.utilities import directory
+from .utilities import directory
 
 
 class Auth0Logger:
@@ -36,7 +36,7 @@ class Auth0Logger:
                 msg {str} -- info message to be logged
             """
 
-            self.logger.info(msg)
+            self.logger.info(f"INFO: {msg}")
 
         def error(self, msg):
             """logs error message
@@ -45,7 +45,7 @@ class Auth0Logger:
                 msg {str} -- error message to be logged
             """
 
-            self.logger.error(msg)
+            self.logger.error(f"ERROR: {msg}")
 
         def debug(self, msg):
             """logs debug message
@@ -54,7 +54,7 @@ class Auth0Logger:
                 msg {str} -- debug message to be logged
             """
 
-            self.logger.debug(msg)
+            self.logger.debug(f"DEBUG: {msg}")
 
         def _add_log_handlers(self, output_file_path=None):
             """Adds log handlers to be used for logging
