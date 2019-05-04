@@ -4,7 +4,7 @@
 from os import path, makedirs
 
 
-def ensure_exists(file_path):
+def ensure_directory_exists(file_path):
     """Creates directory if it does not exist
 
     Arguments:

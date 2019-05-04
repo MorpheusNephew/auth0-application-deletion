@@ -1,9 +1,10 @@
 from auth0.v3 import Auth0Error
 from auth0.v3.management import Clients, Connections, Users
-from deletesite.auth0client import Auth0Client, _perform_request
+from deletesite.auth0wrapper import Auth0Client
+from deletesite.utilities import perform_request
 from uuid import uuid4
 
-_auth0_module = 'deletesite.auth0client'
+_auth0_module = 'deletesite.auth0wrapper.auth0client'
 
 
 def _mock_internal_auth0_client_setup(mocker):

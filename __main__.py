@@ -1,7 +1,7 @@
-"""Main file that will be run when the command `python deletesite` is ran
+"""Main file that will be run when the command `python .` is ran
 """
 
-from .settings import load_settings
+from deletesite.utilities import load_settings
 
 if __name__ == "__main__":
     load_settings()
