@@ -1,6 +1,3 @@
-"""Testing the logger functionality
-"""
-
 from deletesite.auth0logger import Auth0Logger
 
 auth0_logger_module = 'deletesite.auth0logger'

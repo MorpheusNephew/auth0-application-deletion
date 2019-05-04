@@ -1,6 +1,3 @@
-"""Settings file specifically to load the environment files
-"""
-
 from dotenv import load_dotenv
 
 

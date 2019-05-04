@@ -1,6 +1,3 @@
-"""Test file for directory utilities
-"""
-
 from deletesite.utilities.directory import ensure_exists
 
 from os import path

@@ -1,6 +1,3 @@
-"""A singleton logger
-"""
-
 import logging
 from .utilities import directory
 
