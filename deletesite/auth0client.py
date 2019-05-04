@@ -9,6 +9,12 @@ _domain = os.getenv('AUTH0_DOMAIN', '')
 
 
 def _get_auth0_token():
+    """Helper method to get an access token to be used to authenticate with
+    the auth0 management API
+
+    Returns:
+        str -- access token for the Auth0 management API
+    """
 
     get_token = GetToken(_domain)
 
@@ -21,8 +27,36 @@ def _get_auth0_token():
 
 
 def _get_auth0_client(management_auth_token):
+    """Helper method that takes an access token and creates an instance of
+    the Auth0 class
+
+    Arguments:
+        management_auth_token {str} -- access token for management API
+
+    Returns:
+        Auth0 -- instance of the Auth0 class
+    """
 
     return Auth0(_domain, management_auth_token)
+
+
+def _perform_request(request):
+    """Wrapper for requests to either return data or
+    returning an error if an exception is raised
+
+    Arguments:
+        request {lambda} -- an anonymous function to be called
+
+    Returns:
+        data -- the data will either be a response from the request
+        or an exception
+    """
+
+    # TODO: Determine strategy for DTO usage
+    try:
+        return request()
+    except Exception as err:
+        return err
 
 
 class Auth0Client:
@@ -55,7 +89,8 @@ class Auth0Client:
                 object -- a response from auth0
             """
 
-            return self._auth0.clients.delete(application_id)
+            return _perform_request(
+                lambda: self._auth0.clients.delete(application_id))
 
         def get_application(self, application_id):
             """Gets an auth0 application/client
@@ -67,7 +102,8 @@ class Auth0Client:
                 object -- a response from auth0
             """
 
-            return self._auth0.clients.get(application_id)
+            return _perform_request(
+                lambda: self._auth0.clients.get(application_id))
 
         def delete_connection(self, connection_id):
             """Deletes an auth0 connection
@@ -79,7 +115,8 @@ class Auth0Client:
                 object -- a respnose from auth0
             """
 
-            return self._auth0.connections.delete(connection_id)
+            return _perform_request(
+                lambda: self._auth0.connections.delete(connection_id))
 
         def get_connection(self, connection_id):
             """Gets an auth0 connection
@@ -91,7 +128,8 @@ class Auth0Client:
                 object -- a response from auth0
             """
 
-            return self._auth0.connections.get(connection_id)
+            return _perform_request(
+                lambda: self._auth0.connections.get(connection_id))
 
         def delete_user(self, user_id):
             """Deletes an auth0 user
@@ -103,4 +141,5 @@ class Auth0Client:
                 object -- a response from auth0
             """
 
-            return self._auth0.users.delete(user_id)
+            return _perform_request(
+                lambda: self._auth0.users.delete(user_id))
