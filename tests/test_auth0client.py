@@ -1,6 +1,6 @@
 from auth0.v3.management import Clients, Connections, Users
 
-from deletesite.auth0client import Auth0Client
+from deletesite.auth0client import Auth0Client, _perform_request
 
 from uuid import uuid4
 
@@ -116,3 +116,24 @@ class TestAuth0Client:
         auth0Client.delete_user(user_id)
 
         mocked_auth0_user_delete.assert_called_once_with(user_id)
+
+    def test__perform_request_with_successful_request(self):
+        """Testing the helper method for performing requests to ensure that
+        the DTO's data property is filled
+        """
+
+        pass
+
+    def test__perform_request_with_unsuccessful_request(self):
+        """Testing the helper method for performing requests to ensure that
+        the DTO's error property is filled
+        """
+
+        pass
+
+    def test__perform_request_with_exception_in_request(self):
+        """Testing the helper method for performing requests to ensure that
+        an exception is caught if one were to occur
+        """
+
+        pass
