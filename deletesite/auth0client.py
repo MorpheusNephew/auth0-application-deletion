@@ -1,11 +1,18 @@
-
-
+from auth0.v3 import Auth0Error
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
-
 import os
 
-_domain = os.getenv('AUTH0_DOMAIN', '')
+
+def _get_auth0_domain():
+    """Gets 'AUTH0_DOMAIN' from environment variables
+
+    Returns:
+        str -- The domain for Auth0 in environment variables
+        or and empty string
+    """
+
+    return os.getenv('AUTH0_DOMAIN', '')
 
 
 def _get_auth0_token():
@@ -16,12 +23,12 @@ def _get_auth0_token():
         str -- access token for the Auth0 management API
     """
 
-    get_token = GetToken(_domain)
+    get_token = GetToken(_get_auth0_domain())
 
     token = get_token.client_credentials(
         os.getenv('AUTH0_CLIENT_ID', ''),
         os.getenv('AUTH0_CLIENT_SECRET', ''),
-        f"https://{_domain}/api/v2/")
+        f"https://{_get_auth0_domain()}/api/v2/")
 
     return token['access_token']
 
@@ -37,7 +44,7 @@ def _get_auth0_client(management_auth_token):
         Auth0 -- instance of the Auth0 class
     """
 
-    return Auth0(_domain, management_auth_token)
+    return Auth0(_get_auth0_domain(), management_auth_token)
 
 
 def _perform_request(request):
@@ -52,11 +59,18 @@ def _perform_request(request):
         or an exception
     """
 
-    # TODO: Determine strategy for DTO usage
+    # TODO: Determine strategy for DTO usage, logging, and handling errors
     try:
-        return request()
+        response = request()
+
+        if response is Auth0Error:
+            print(response)
+            return None
+        else:
+            return response
     except Exception as err:
-        return err
+        print(err)
+        return None
 
 
 class Auth0Client:
@@ -90,7 +104,8 @@ class Auth0Client:
             """
 
             return _perform_request(
-                lambda: self._auth0.clients.delete(application_id))
+                lambda: self._auth0.clients.delete(application_id)
+            )
 
         def get_application(self, application_id):
             """Gets an auth0 application/client
@@ -103,7 +118,8 @@ class Auth0Client:
             """
 
             return _perform_request(
-                lambda: self._auth0.clients.get(application_id))
+                lambda: self._auth0.clients.get(application_id)
+            )
 
         def delete_connection(self, connection_id):
             """Deletes an auth0 connection
@@ -116,7 +132,19 @@ class Auth0Client:
             """
 
             return _perform_request(
-                lambda: self._auth0.connections.delete(connection_id))
+                lambda: self._auth0.connections.delete(connection_id)
+            )
+
+        def get_all_connections(self):
+            """Get all auth0 connections
+
+            Returns:
+                list(object) -- a list of auth0 connections
+            """
+
+            return _perform_request(
+                lambda: self._auth0.connections.all()
+            )
 
         def get_connection(self, connection_id):
             """Gets an auth0 connection
@@ -129,7 +157,8 @@ class Auth0Client:
             """
 
             return _perform_request(
-                lambda: self._auth0.connections.get(connection_id))
+                lambda: self._auth0.connections.get(connection_id)
+            )
 
         def delete_user(self, user_id):
             """Deletes an auth0 user
@@ -142,4 +171,5 @@ class Auth0Client:
             """
 
             return _perform_request(
-                lambda: self._auth0.users.delete(user_id))
+                lambda: self._auth0.users.delete(user_id)
+            )

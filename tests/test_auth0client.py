@@ -1,7 +1,6 @@
+from auth0.v3 import Auth0Error
 from auth0.v3.management import Clients, Connections, Users
-
 from deletesite.auth0client import Auth0Client, _perform_request
-
 from uuid import uuid4
 
 _auth0_module = 'deletesite.auth0client'
@@ -69,7 +68,8 @@ class TestAuth0Client:
         _mock_internal_auth0_client_setup(mocker)
 
         mocked_auth0_connection_delete = mocker.patch.object(
-            Connections, 'delete')
+            Connections, 'delete'
+        )
 
         connection_id = uuid4()
 
@@ -78,6 +78,25 @@ class TestAuth0Client:
         auth0Client.delete_connection(connection_id)
 
         mocked_auth0_connection_delete.assert_called_once_with(connection_id)
+
+    def test_get_all_connections_called(self, mocker):
+        """Testing getting all connections
+
+        Arguments:
+            mocker {pytest.mocker} -- mocking object
+        """
+
+        _mock_internal_auth0_client_setup(mocker)
+
+        mocked_auth0_connections_get = mocker.patch.object(
+            Connections, 'all'
+        )
+
+        auth0Client = Auth0Client()
+
+        auth0Client.get_all_connections()
+
+        mocked_auth0_connections_get.assert_called_once()
 
     def test_get_connection_called_with_connection_id(self, mocker):
         """Testing getting a connection with a connection id
@@ -116,24 +135,3 @@ class TestAuth0Client:
         auth0Client.delete_user(user_id)
 
         mocked_auth0_user_delete.assert_called_once_with(user_id)
-
-    def test__perform_request_with_successful_request(self):
-        """Testing the helper method for performing requests to ensure that
-        the DTO's data property is filled
-        """
-
-        pass
-
-    def test__perform_request_with_unsuccessful_request(self):
-        """Testing the helper method for performing requests to ensure that
-        the DTO's error property is filled
-        """
-
-        pass
-
-    def test__perform_request_with_exception_in_request(self):
-        """Testing the helper method for performing requests to ensure that
-        an exception is caught if one were to occur
-        """
-
-        pass
