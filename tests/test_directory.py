@@ -1,5 +1,4 @@
-from deletesite.utilities.directory import ensure_exists
-
+from deletesite.utilities import ensure_directory_exists
 from os import path
 
 directory_module = 'deletesite.utilities.directory'
@@ -11,7 +10,7 @@ class TestDirectory:
 
     def test_creating_directory_if_none_present(self, mocker):
         """Test asserts directory does not exist then tests that the
-        `ensure_exists` method creates the directory and removes the
+        `ensure_directory_exists` method creates the directory and removes the
         directory in cleanup
 
         Arguments:
@@ -27,13 +26,13 @@ class TestDirectory:
         mocked_path.dirname.return_value = dir_path
         mocked_path.exists.return_value = False
 
-        ensure_exists(file_path)
+        ensure_directory_exists(file_path)
 
         mocked_makedirs.assert_called_once_with(dir_path)
 
     def test_should_not_error_when_attempting_to_create_an_existing_directory(self, mocker):
-        """Test asserts that directory `ensure_exists` method does not error if
-        directory already exists
+        """Test asserts that directory `ensure_directory_exists` method
+        does not error if directory already exists
 
         Arguments:
             mocker {pytest_mocker} -- wrapper to python mock
@@ -44,6 +43,6 @@ class TestDirectory:
 
         mocked_exists.return_value = True
 
-        ensure_exists('file path')
+        ensure_directory_exists('file path')
 
         mocked_makedirs.assert_not_called()

@@ -1,5 +1,5 @@
 import logging
-from .utilities import directory
+from deletesite.utilities import ensure_directory_exists
 
 
 class Auth0Logger:
@@ -63,7 +63,7 @@ class Auth0Logger:
             self.logger.setLevel(logging.DEBUG)
 
             if output_file_path is not None:
-                directory.ensure_exists(output_file_path)
+                ensure_directory_exists(output_file_path)
                 self.logger.addHandler(logging.FileHandler(output_file_path))
 
             self.logger.addHandler(logging.StreamHandler())

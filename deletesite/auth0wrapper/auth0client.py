@@ -1,6 +1,7 @@
 from auth0.v3 import Auth0Error
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
+from deletesite.utilities import perform_request
 import os
 
 
@@ -34,7 +35,7 @@ class Auth0Client:
                 object -- a response from auth0
             """
 
-            return _perform_request(
+            return perform_request(
                 lambda: self._auth0.clients.delete(application_id)
             )
 
@@ -48,7 +49,7 @@ class Auth0Client:
                 object -- a response from auth0
             """
 
-            return _perform_request(
+            return perform_request(
                 lambda: self._auth0.clients.get(application_id)
             )
 
@@ -62,7 +63,7 @@ class Auth0Client:
                 object -- a respnose from auth0
             """
 
-            return _perform_request(
+            return perform_request(
                 lambda: self._auth0.connections.delete(connection_id)
             )
 
@@ -73,7 +74,7 @@ class Auth0Client:
                 list(object) -- a list of auth0 connections
             """
 
-            return _perform_request(
+            return perform_request(
                 lambda: self._auth0.connections.all()
             )
 
@@ -87,7 +88,7 @@ class Auth0Client:
                 object -- a response from auth0
             """
 
-            return _perform_request(
+            return perform_request(
                 lambda: self._auth0.connections.get(connection_id)
             )
 
@@ -101,7 +102,7 @@ class Auth0Client:
                 object -- a response from auth0
             """
 
-            return _perform_request(
+            return perform_request(
                 lambda: self._auth0.users.delete(user_id)
             )
 
@@ -147,29 +148,3 @@ def _get_auth0_client(management_auth_token):
     """
 
     return Auth0(_get_auth0_domain(), management_auth_token)
-
-
-def _perform_request(request):
-    """Wrapper for requests to either return data or
-    returning an error if an exception is raised
-
-    Arguments:
-        request {lambda} -- an anonymous function to be called
-
-    Returns:
-        data -- the data will either be a response from the request
-        or an exception
-    """
-
-    # TODO: Determine strategy for DTO usage, logging, and handling errors
-    try:
-        response = request()
-
-        if response is Auth0Error:
-            print(response)
-            return None
-        else:
-            return response
-    except Exception as err:
-        print(err)
-        return None
