@@ -1,7 +1,7 @@
-from deletesite.utilities import ensure_directory_exists
+from deletesite.loggers.utilities import ensure_directory_exists
 from os import path
 
-directory_module = 'deletesite.utilities.directory'
+directory_module = 'deletesite.loggers.utilities.directory'
 
 
 class TestDirectory:
