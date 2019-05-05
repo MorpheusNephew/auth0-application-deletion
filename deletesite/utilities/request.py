@@ -1,5 +1,5 @@
 from auth0.v3 import Auth0Error
-# from deletesite.factories import DtoCreationFactory
+from deletesite.factories import Auth0LoggerFactory
 
 
 def perform_request(request, process=None):
@@ -14,18 +14,23 @@ def perform_request(request, process=None):
         or an exception
     """
 
-    # TODO: Determine strategy for DTO usage, logging, and handling errors
+    logger = Auth0LoggerFactory.get_logger()
+
     try:
         response = request()
 
         if response is Auth0Error:
-            print(response)
+            logger.error(response)
             return None
 
+        data = None
         if process is None:
-            return response
+            data = response
         else:
-            return process(response)
+            data = process(response)
+
+        logger.info(f'Retrieved data: {data}')
+        return data
     except Exception as err:
-        print(err)
+        logger.error(err)
         return None
