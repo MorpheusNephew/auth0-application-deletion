@@ -1,4 +1,4 @@
-from deletesite.dtos import ApplicationDto, ConnectionDto, UserDto
+from deletesite.dtos import ApplicationDto, ConnectionDto, UsersDto
 
 
 class DtoCreationFactory:
@@ -35,14 +35,15 @@ class DtoCreationFactory:
         return ConnectionDto.create_from_dict(connectionDict)
 
     @staticmethod
-    def createUserDtoFromDict(userDict):
-        """Factory method to transform a dictionary to a UserDto
+    def createUsersDtoFromDict(userDict):
+        """Factory method to transform a dictionary to a UsersDto
 
         Arguments:
-            userDict {dict} -- dictionary representing a user from Auth0
+            userDict {dict} -- dictionary representing a user response
+            from Auth0
 
         Returns:
-            UserDto -- representing a user object from Auth0
+            UsersDto -- representing a users object from Auth0
         """
 
-        return UserDto.create_from_dict(userDict)
+        return UsersDto.create_from_dict(userDict)
