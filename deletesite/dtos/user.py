@@ -54,11 +54,40 @@ class UserDto:
 
         identities = dictionary.get('identities', [])
 
-        user_identity_dtos = map(UserIdentityDto.create_from_dict, identities)
-
         return UserDto(
             user_id=dictionary.get('user_id', ''),
             given_name=dictionary.get('given_name', ''),
             family_name=dictionary.get('family_name', ''),
-            identities=user_identity_dtos
+            identities=map(UserIdentityDto.create_from_dict, identities)
+        )
+
+
+@dataclass
+class UsersDto:
+    """Represents response from auth0 when getting all users
+    """
+
+    start: int = 0
+    limit: int = 100
+    users: List[UserDto]
+    total: int = 0
+
+    @staticmethod
+    def create_from_dict(dictionary):
+        """Creates `UsersDto` from dictionary
+
+        Arguments:
+            dictionary {dict} -- response from auth0 when getting all users
+
+        Returns:
+            UsersDto -- auth0 response converted into a class
+        """
+
+        users = dictionary.get('users', [])
+
+        return UsersDto(
+            start=dictionary.get('start', 0),
+            limit=dictionary.get('limit', 100),
+            users=map(UserDto.create_from_dict, users),
+            total=dictionary.get('total', 0)
         )
