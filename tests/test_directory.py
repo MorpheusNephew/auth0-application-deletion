@@ -30,7 +30,10 @@ class TestDirectory:
 
         mocked_makedirs.assert_called_once_with(dir_path)
 
-    def test_should_not_error_when_attempting_to_create_an_existing_directory(self, mocker):
+    def test_should_not_error_when_attempting_to_create_an_existing_directory(
+        self,
+        mocker
+    ):
         """Test asserts that directory `ensure_directory_exists` method
         does not error if directory already exists
 
