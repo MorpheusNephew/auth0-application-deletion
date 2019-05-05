@@ -12,7 +12,8 @@ class Auth0Logger:
 
         if Auth0Logger._instance is None:
             Auth0Logger._instance = Auth0Logger._Auth0LoggerInstance(
-                output_file_path)
+                output_file_path
+            )
 
         return Auth0Logger._instance
 
