@@ -1,4 +1,3 @@
-from auth0.v3 import Auth0Error
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
 from deletesite.utilities import perform_request
@@ -104,6 +103,14 @@ class Auth0Client:
 
             return perform_request(
                 lambda: self._auth0.users.delete(user_id)
+            )
+
+        def get_all_users_with_connection(self, connection_name):
+
+            return perform_request(
+                lambda: self._auth0.users.list(
+                    per_page=100, connection=connection_name
+                )
             )
 
 
