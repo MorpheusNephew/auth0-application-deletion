@@ -1,1 +1,2 @@
-from .factory import DtoCreationFactory
+from .dtocreationfactory import DtoCreationFactory
+from .loggerfactory import Auth0LoggerFactory
