@@ -1,5 +1,6 @@
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
+from deletesite.factories import DtoCreationFactory
 from deletesite.utilities import perform_request
 import os
 
@@ -35,7 +36,7 @@ class Auth0Client:
             """
 
             return perform_request(
-                lambda: self._auth0.clients.delete(application_id)
+                request=lambda: self._auth0.clients.delete(application_id)
             )
 
         def get_application(self, application_id):
@@ -49,7 +50,8 @@ class Auth0Client:
             """
 
             return perform_request(
-                lambda: self._auth0.clients.get(application_id)
+                request=lambda: self._auth0.clients.get(application_id),
+                process=DtoCreationFactory.create_application_dto_from_dict
             )
 
         def delete_connection(self, connection_id):
@@ -63,7 +65,7 @@ class Auth0Client:
             """
 
             return perform_request(
-                lambda: self._auth0.connections.delete(connection_id)
+                request=lambda: self._auth0.connections.delete(connection_id)
             )
 
         def get_all_connections(self):
@@ -74,7 +76,7 @@ class Auth0Client:
             """
 
             return perform_request(
-                lambda: self._auth0.connections.all()
+                request=lambda: self._auth0.connections.all()
             )
 
         def get_connection(self, connection_id):
@@ -88,7 +90,8 @@ class Auth0Client:
             """
 
             return perform_request(
-                lambda: self._auth0.connections.get(connection_id)
+                request=lambda: self._auth0.connections.get(connection_id),
+                process=DtoCreationFactory.create_connection_dto_from_dict
             )
 
         def delete_user(self, user_id):
@@ -102,7 +105,7 @@ class Auth0Client:
             """
 
             return perform_request(
-                lambda: self._auth0.users.delete(user_id)
+                request=lambda: self._auth0.users.delete(user_id)
             )
 
         def get_all_users_with_connection(self, connection_name):
@@ -116,9 +119,10 @@ class Auth0Client:
             """
 
             return perform_request(
-                lambda: self._auth0.users.list(
+                request=lambda: self._auth0.users.list(
                     per_page=100, connection=connection_name
-                )
+                ),
+                process=DtoCreationFactory.create_users_dto_from_dict
             )
 
 
