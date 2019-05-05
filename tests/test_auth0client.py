@@ -1,10 +1,8 @@
-from auth0.v3 import Auth0Error
 from auth0.v3.management import Clients, Connections, Users
 from deletesite.auth0wrapper import Auth0Client
-from deletesite.utilities import perform_request
 from uuid import uuid4
 
-_auth0_module = 'deletesite.auth0wrapper.auth0client'
+_auth0_module = 'deletesite.auth0wrapper.client'
 
 
 def _mock_internal_auth0_client_setup(mocker):
@@ -136,3 +134,27 @@ class TestAuth0Client:
         auth0Client.delete_user(user_id)
 
         mocked_auth0_user_delete.assert_called_once_with(user_id)
+
+    def test_get_all_users_called_with_connection_name(self, mocker):
+        """Testing getting all users based on a connection name
+
+        Arguments:
+            mocker {pytest.mocker} -- mocking object
+        """
+
+        _mock_internal_auth0_client_setup(mocker)
+
+        mocked_auth0_user_get_all_with_connection = mocker.patch.object(
+            Users, 'list')
+
+        connection_name = str(uuid4())
+        default_users_per_page = 100
+
+        auth0Client = Auth0Client()
+
+        auth0Client.get_all_users_with_connection(connection_name)
+
+        mocked_auth0_user_get_all_with_connection.assert_called_once_with(
+            connection=connection_name,
+            per_page=default_users_per_page
+        )
