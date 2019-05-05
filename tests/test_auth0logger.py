@@ -1,4 +1,4 @@
-from deletesite.logger import Auth0Logger
+from deletesite.loggers import Auth0Logger
 
 auth0_logger_module = 'deletesite.loggers.logger'
 
