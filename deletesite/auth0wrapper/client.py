@@ -76,7 +76,13 @@ class Auth0Client:
             """
 
             return perform_request(
-                request=lambda: self._auth0.connections.all()
+                request=lambda: self._auth0.connections.all(),
+                process=lambda connections: list(
+                    map(
+                        DtoCreationFactory.create_connection_dto_from_dict,
+                        connections
+                    )
+                )
             )
 
         def get_connection(self, connection_id):
