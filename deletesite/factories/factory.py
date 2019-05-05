@@ -7,7 +7,7 @@ class DtoCreationFactory:
     """
 
     @staticmethod
-    def createApplicationDtoFromDict(applicationDict):
+    def create_application_dto_from_dict(applicationDict):
         """Factory method to transform a dictionary to an ApplicationDto
 
         Arguments:
@@ -21,7 +21,7 @@ class DtoCreationFactory:
         return ApplicationDto.create_from_dict(applicationDict)
 
     @staticmethod
-    def createConnectionDtoFromDict(connectionDict):
+    def create_connection_dto_from_dict(connectionDict):
         """Factory method to transform a dictionary to a ConnectionDto
 
         Arguments:
@@ -35,7 +35,7 @@ class DtoCreationFactory:
         return ConnectionDto.create_from_dict(connectionDict)
 
     @staticmethod
-    def createUsersDtoFromDict(userDict):
+    def create_users_dto_from_dict(userDict):
         """Factory method to transform a dictionary to a UsersDto
 
         Arguments:
