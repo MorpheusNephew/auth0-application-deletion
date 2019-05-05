@@ -58,7 +58,7 @@ class UserDto:
             user_id=dictionary.get('user_id', ''),
             given_name=dictionary.get('given_name', ''),
             family_name=dictionary.get('family_name', ''),
-            identities=map(UserIdentityDto.create_from_dict, identities)
+            identities=list(map(UserIdentityDto.create_from_dict, identities))
         )
 
 
@@ -88,6 +88,6 @@ class UsersDto:
         return UsersDto(
             start=dictionary.get('start', 0),
             limit=dictionary.get('limit', 100),
-            users=map(UserDto.create_from_dict, users),
+            users=list(map(UserDto.create_from_dict, users)),
             total=dictionary.get('total', 0)
         )
