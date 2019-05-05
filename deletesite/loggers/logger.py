@@ -1,5 +1,5 @@
 import logging
-from deletesite.utilities import ensure_directory_exists
+from deletesite.loggers.utilities import ensure_directory_exists
 
 
 class Auth0Logger:
