@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 
 
@@ -10,7 +10,7 @@ class UserIdentityDto:
     connection: str
     user_id: str
     provider: str
-    isSocial: bool
+    isSocial: bool = False
 
     @staticmethod
     def create_from_dict(dictionary):
@@ -39,7 +39,7 @@ class UserDto:
     user_id: str
     given_name: str
     family_name: str
-    identities: List[UserIdentityDto]
+    identities: List[UserIdentityDto] = field(default_factory=List)
 
     @staticmethod
     def create_from_dict(dictionary):
@@ -69,7 +69,7 @@ class UsersDto:
 
     start: int = 0
     limit: int = 100
-    users: List[UserDto]
+    users: List[UserDto] = field(default_factory=List)
     total: int = 0
 
     @staticmethod
