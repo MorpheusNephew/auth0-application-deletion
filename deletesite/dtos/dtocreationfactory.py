@@ -1,4 +1,6 @@
-from deletesite.dtos import ApplicationDto, ConnectionDto, UsersDto
+from .application import ApplicationDto
+from .connection import ConnectionDto
+from .user import UsersDto
 
 
 class DtoCreationFactory:

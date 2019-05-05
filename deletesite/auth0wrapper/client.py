@@ -1,6 +1,6 @@
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
-from deletesite.factories import DtoCreationFactory
+from deletesite.dtos import DtoCreationFactory
 from deletesite.utilities import perform_request
 import os
 

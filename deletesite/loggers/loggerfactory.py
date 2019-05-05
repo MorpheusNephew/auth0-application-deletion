@@ -1,4 +1,4 @@
-from deletesite.loggers import Auth0Logger
+from .logger import Auth0Logger
 import os
 
 
