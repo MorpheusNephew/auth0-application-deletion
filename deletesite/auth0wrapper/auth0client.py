@@ -106,6 +106,14 @@ class Auth0Client:
             )
 
         def get_all_users_with_connection(self, connection_name):
+            """Gets all users associated with a connection
+
+            Arguments:
+                connection_name {str} -- name associated with a connection
+
+            Returns:
+                object -- a response from auth0
+            """
 
             return perform_request(
                 lambda: self._auth0.users.list(
