@@ -1,1 +1,1 @@
-from .auth0client import Auth0Client
+from .client import Auth0Client

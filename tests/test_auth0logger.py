@@ -1,6 +1,6 @@
 from deletesite.logger import Auth0Logger
 
-auth0_logger_module = 'deletesite.auth0logger'
+auth0_logger_module = 'deletesite.loggers.logger'
 
 
 class TestLogger:

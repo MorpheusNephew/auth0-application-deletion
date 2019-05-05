@@ -2,7 +2,7 @@ from auth0.v3.management import Clients, Connections, Users
 from deletesite.auth0wrapper import Auth0Client
 from uuid import uuid4
 
-_auth0_module = 'deletesite.auth0wrapper.auth0client'
+_auth0_module = 'deletesite.auth0wrapper.client'
 
 
 def _mock_internal_auth0_client_setup(mocker):
