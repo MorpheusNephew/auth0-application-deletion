@@ -149,6 +149,7 @@ class TestAuth0Client:
 
         connection_name = str(uuid4())
         default_users_per_page = 100
+        default_users_page = 0
 
         auth0Client = Auth0Client()
 
@@ -156,5 +157,6 @@ class TestAuth0Client:
 
         mocked_auth0_user_get_all_with_connection.assert_called_once_with(
             connection=connection_name,
-            per_page=default_users_per_page
+            per_page=default_users_per_page,
+            page=default_users_page
         )
