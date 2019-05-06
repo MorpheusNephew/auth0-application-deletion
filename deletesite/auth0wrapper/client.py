@@ -114,7 +114,7 @@ class Auth0Client:
                 request=lambda: self._auth0.users.delete(user_id)
             )
 
-        def get_all_users_with_connection(self, connection_name):
+        def get_all_users_with_connection(self, connection_name, page=0):
             """Gets all users associated with a connection
 
             Arguments:
@@ -126,7 +126,9 @@ class Auth0Client:
 
             return perform_request(
                 request=lambda: self._auth0.users.list(
-                    per_page=100, connection=connection_name
+                    page=page,
+                    per_page=100,
+                    connection=connection_name
                 ),
                 process=DtoCreationFactory.create_users_dto_from_dict
             )
