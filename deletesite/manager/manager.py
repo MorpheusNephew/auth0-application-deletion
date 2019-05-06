@@ -36,6 +36,8 @@ class Auth0Manager:
             else:
                 print('Deletion process will now start\n\n\n')
 
+                # TODO: Continue to flesh out deletion code
+
     def _get_connections_to_delete(self, application_id):
         """Gets connections associated with the application id
 
