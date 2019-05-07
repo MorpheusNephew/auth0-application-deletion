@@ -2,10 +2,14 @@
 """
 
 from deletesite.utilities import load_settings
+from deletesite.manager import Auth0ManagerFactory
 
-if __name__ == "__main__":
+
+def main():
     load_settings()
 
-    name = input("What is your name? ")
+    Auth0ManagerFactory.get_auth0_manager().run()
 
-    print(f"Hello {name}")
+
+if __name__ == "__main__":
+    main()

@@ -1,6 +1,6 @@
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
-from deletesite.factories import DtoCreationFactory
+from deletesite.dtos import DtoCreationFactory
 from deletesite.utilities import perform_request
 import os
 
@@ -55,7 +55,7 @@ class Auth0Client:
             )
 
         def delete_connection(self, connection_id):
-            """Deletes an auth0 connection
+            """Deletes an auth0 connection and all users associated
 
             Arguments:
                 connection_id {str} -- id associated with the connection
@@ -98,37 +98,6 @@ class Auth0Client:
             return perform_request(
                 request=lambda: self._auth0.connections.get(connection_id),
                 process=DtoCreationFactory.create_connection_dto_from_dict
-            )
-
-        def delete_user(self, user_id):
-            """Deletes an auth0 user
-
-            Arguments:
-                user_id {str} -- id associated with the user
-
-            Returns:
-                object -- a response from auth0
-            """
-
-            return perform_request(
-                request=lambda: self._auth0.users.delete(user_id)
-            )
-
-        def get_all_users_with_connection(self, connection_name):
-            """Gets all users associated with a connection
-
-            Arguments:
-                connection_name {str} -- name associated with a connection
-
-            Returns:
-                object -- a response from auth0
-            """
-
-            return perform_request(
-                request=lambda: self._auth0.users.list(
-                    per_page=100, connection=connection_name
-                ),
-                process=DtoCreationFactory.create_users_dto_from_dict
             )
 
 
