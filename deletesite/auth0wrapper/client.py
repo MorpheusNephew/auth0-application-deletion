@@ -100,39 +100,6 @@ class Auth0Client:
                 process=DtoCreationFactory.create_connection_dto_from_dict
             )
 
-        def delete_user(self, user_id):
-            """Deletes an auth0 user
-
-            Arguments:
-                user_id {str} -- id associated with the user
-
-            Returns:
-                object -- a response from auth0
-            """
-
-            return perform_request(
-                request=lambda: self._auth0.users.delete(user_id)
-            )
-
-        def get_all_users_with_connection(self, connection_name, page=0):
-            """Gets all users associated with a connection
-
-            Arguments:
-                connection_name {str} -- name associated with a connection
-
-            Returns:
-                object -- a response from auth0
-            """
-
-            return perform_request(
-                request=lambda: self._auth0.users.list(
-                    page=page,
-                    per_page=100,
-                    connection=connection_name
-                ),
-                process=DtoCreationFactory.create_users_dto_from_dict
-            )
-
 
 def _get_auth0_domain():
     """Gets 'AUTH0_DOMAIN' from environment variables
