@@ -12,6 +12,8 @@ class Auth0Manager:
         self.client = Auth0ClientFactory.get_auth0_client()
 
     def run(self):
+        """Start application
+        """
 
         print('Welcome to the Auth0 Deletion App')
 
@@ -33,10 +35,20 @@ class Auth0Manager:
 
             if answer != 'y' and answer != 'yes':
                 break
-            else:
-                print('Deletion process will now start\n\n\n')
 
-                # TODO: Continue to flesh out deletion code
+            self.logger.info(
+                f'Starting deletion process for all things associated with application {application_dto}'
+            )
+
+            self._delete_connections(connections_for_application)
+            self.client.delete_application(application_dto.client_id)
+
+            answer = input('Would you like to delete another application? ')
+
+            if answer != 'y' and answer != 'yes':
+                break
+
+            print("\n\n\n\n")
 
     def _get_connections_to_delete(self, application_id):
         """Gets connections associated with the application id
@@ -86,3 +98,19 @@ class Auth0Manager:
             return f'Is this the correct application ({application_dto}) you would like to delete? '
         else:
             return f'Is this the correct application ({application_dto}) and set of connections ({connections_for_application}) to delete? '
+
+    def _delete_connections(self, connections_to_delete=[]):
+        """Deleting a list of auth0 connections
+
+        Keyword Arguments:
+            connections_to_delete {list} -- list of ConnectionDto
+                (default: {[]})
+        """
+
+        if not connections_to_delete:
+            return
+
+        self.logger.info(f'Deleting connections {connections_to_delete}')
+
+        for connection in connections_to_delete:
+            self.client.delete_connection(connection.id)
