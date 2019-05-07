@@ -63,9 +63,7 @@ class Auth0Manager:
 
         all_connections = self.client.get_all_connections()
 
-        excluded_connection_strategies = os.getenv(
-            'AUTH0_EXCLUDE_CONNECTION_STRATEGIES', ''
-        ).split(',')
+        excluded_connection_strategies = ['auth0']
 
         connections_for_application = list(
             filter(
