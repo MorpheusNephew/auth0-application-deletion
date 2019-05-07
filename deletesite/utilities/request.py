@@ -24,7 +24,6 @@ def perform_request(request, process=None):
         else:
             data = process(response)
 
-        logger.info(f'Retrieved data: {data}')
         return data
     except Exception as err:
         logger.error(err)
