@@ -1,4 +1,3 @@
-from auth0.v3 import Auth0Error
 from deletesite.loggers import Auth0LoggerFactory
 
 
@@ -19,10 +18,6 @@ def perform_request(request, process=None):
     try:
         response = request()
 
-        if response is Auth0Error:
-            logger.error(response)
-            return None
-
         data = None
         if process is None:
             data = response
@@ -33,4 +28,4 @@ def perform_request(request, process=None):
         return data
     except Exception as err:
         logger.error(err)
-        return None
+        raise
