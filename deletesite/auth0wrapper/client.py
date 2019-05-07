@@ -55,7 +55,7 @@ class Auth0Client:
             )
 
         def delete_connection(self, connection_id):
-            """Deletes an auth0 connection
+            """Deletes an auth0 connection and all users associated
 
             Arguments:
                 connection_id {str} -- id associated with the connection
