@@ -40,10 +40,14 @@ class TestLogger:
         """
 
         mocked_logger_addHandler = mocker.patch.object(Logger, 'addHandler')
+        mocked_path_exists = mocker.patch(
+            'deletesite.loggers.utilities.directory.path.exists')
         # mocked_logger_streamHandler = mocker.patch(
         #     f'{_logging_module}.StreamHandler')
         mocked_logger_fileHandler = mocker.patch(
             f'{_logging_module}.FileHandler')
+
+        mocked_path_exists.return_value = True
 
         file_path = f'{str(uuid4())}.log'
 
