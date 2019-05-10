@@ -16,12 +16,6 @@ These operations are hitting the Auth0 API
 
   * if no connection is found display message about no connections
 
-* Perform GET /api/v2/users to find all users associated with a connection and store the list of user ids
-
-  * if no users associated display message about no users associated with the connection id
-
-* Perform DELETE /api/v2/users/{id} for users list. **Note** there is no [bulk delete](https://community.auth0.com/t/is-there-a-way-to-bulk-delete-users/10832) users endpoint. Should batch delete requests to not exceed Auth0's [rate limits](https://auth0.com/docs/policies/rate-limits#management-api-v2)
-
 * Perform DELETE /api/v2/connections/{id} for connections list
 
 * Perform DELETE /api/v2/clients/{id} for application
