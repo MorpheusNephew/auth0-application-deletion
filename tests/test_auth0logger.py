@@ -57,3 +57,57 @@ class TestLogger:
         # Figure out: AttributeError: 'LogCaptureHandler' object has no attribute 'stream'
         # mocked_logger_streamHandler.assert_called_once()
         mocked_logger_fileHandler.assert_called_once()
+
+    def test_log_info_called(self, mocker):
+        """Ensuring that Logger.info is called when the logger instance
+            info method is called
+
+        Arguments:
+            mocker {pytest.mocker} -- wrapper for python mock
+        """
+
+        mocked_logger_info = mocker.patch.object(Logger, 'info')
+
+        auth0Logger = Auth0Logger._Auth0LoggerInstance()
+
+        string = str(uuid4())
+
+        auth0Logger.info(string)
+
+        mocked_logger_info.assert_called_once()
+
+    def test_log_debug_called(self, mocker):
+        """Ensuring that Logger.debug is called when the logger instance
+            debug method is called
+
+        Arguments:
+            mocker {pytest.mocker} -- wrapper for python mock
+        """
+
+        mocked_logger_debug = mocker.patch.object(Logger, 'debug')
+
+        auth0Logger = Auth0Logger._Auth0LoggerInstance()
+
+        string = str(uuid4())
+
+        auth0Logger.debug(string)
+
+        mocked_logger_debug.assert_called_once()
+
+    def test_log_error_called(self, mocker):
+        """Ensuring that Logger.error is called when the logger instance
+            error method is called
+
+        Arguments:
+            mocker {pytest.mocker} -- wrapper for python mock
+        """
+
+        mocked_logger_error = mocker.patch.object(Logger, 'error')
+
+        auth0Logger = Auth0Logger._Auth0LoggerInstance()
+
+        string = str(uuid4())
+
+        auth0Logger.error(string)
+
+        mocked_logger_error.assert_called_once()
