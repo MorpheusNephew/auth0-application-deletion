@@ -1,6 +1,5 @@
 from deletesite.loggers import Auth0LoggerFactory
 from deletesite.auth0wrapper import Auth0ClientFactory
-import os
 
 
 class Auth0Manager:
